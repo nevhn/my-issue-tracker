@@ -1,8 +1,21 @@
 import './App.css';
+import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { CurrentIssues } from './Pages/CurrentIssues';
 import { AddIssue } from './Pages/AddIssue';
+import { useEffect, useState } from 'react';
 function App() {
+  const [issues, setIssues] = useState([]);
+  useEffect(() => {
+    const fetchIssues = async () => {
+      const response = await axios.get('/issues');
+      setIssues(response.data);
+    };
+
+    fetchIssues();
+  }, []);
+
+  console.log('list of current issues: ', issues);
   return (
     <Router>
       <div className='App'>
@@ -12,7 +25,7 @@ function App() {
       </div>
       <Switch>
         <Route exact path='/'>
-          <CurrentIssues />
+          <CurrentIssues issues={issues} />
         </Route>
         <Route exact path='/add-issue'>
           <AddIssue />
