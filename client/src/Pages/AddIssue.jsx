@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const AddIssue = () => {
   const [description, setDescription] = useState('');
@@ -10,10 +11,10 @@ export const AddIssue = () => {
   useEffect(() => {
     const getDevs = async () => {
       try {
-        const response = await axios('/devs');
+        const response = await axios('/issues/devs');
         // setDevs([...new Set(response.data)]);
         const uniqueDevs = [
-          ...new Set(response.data.map((item) => item.assignedTo)),
+          ...new Set(response.data.map((item) => item.username)),
         ];
         setDevs(uniqueDevs);
       } catch (error) {
@@ -38,7 +39,7 @@ export const AddIssue = () => {
         assignedTo,
         priority,
       };
-      const response = await axios.post('/add', body);
+      const response = await axios.post('/issues/add', body);
       console.log(response.status);
     } catch (error) {
       console.error(error);
@@ -97,6 +98,9 @@ export const AddIssue = () => {
         </label>
         <button type='submit'>Add</button>
       </form>
+      <Link to='/'>
+        <button> Current issues</button>
+      </Link>
     </div>
   );
 };

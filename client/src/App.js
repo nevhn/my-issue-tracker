@@ -5,6 +5,7 @@ import { CurrentIssues } from './Pages/CurrentIssues';
 import { AddIssue } from './Pages/AddIssue';
 import { useEffect, useState } from 'react';
 import { Register } from './Pages/Register';
+import { Login } from './Pages/Login';
 function App() {
   const [issues, setIssues] = useState([]);
   useEffect(() => {
@@ -34,9 +35,11 @@ function App() {
         <Route exact path='/register'>
           <Register />
         </Route>
+        <Route exact path='/login'>
+          <Login />
+        </Route>
       </Switch>
     </Router>
   );
 }
-
 export default App;

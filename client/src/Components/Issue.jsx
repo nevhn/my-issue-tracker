@@ -1,18 +1,26 @@
+import axios from 'axios';
 import React from 'react';
 import './Issue';
 export const Issue = ({ issue }) => {
+  console.log(issue);
+  const handleClick = async () => {
+    const response = await axios.delete('/issues', {
+      id: issue._id,
+    });
+    console.log(response.data);
+  };
   return (
     <div>
       <div className='issue-table'>
-        <button>Close issue</button>
+        <button onClick={() => handleClick()}>Close issue</button>
         <p>
-          Priority <span>{issue.priority}</span>
+          Priority: <span>{issue.priority}</span>
         </p>
         <p>
           Assigned To: <span>{issue.assignedTo}</span>
         </p>
         <p>
-          Description
+          Description:
           <span>{issue.description}</span>
         </p>
       </div>

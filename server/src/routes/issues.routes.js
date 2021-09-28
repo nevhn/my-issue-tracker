@@ -7,7 +7,7 @@ const use = (fn) => (req, res, next) => {
 
 router.get('/', use(controller.getAllIssues));
 router.get('/devs', use(controller.getAllDevs));
-router.post('/add', use(controller.addIssues));
-router.delete('/', use(controller.delete));
+router.post('/add', use(controller.addIssue));
+router.delete('/', use(controller.deleteIssue));
 
 module.exports = router;
