@@ -9,7 +9,7 @@ export const Issue = ({ issue }) => {
           Priority <span>{issue.priority}</span>
         </p>
         <p>
-          Username <span>{issue.assignedTo}</span>
+          Assigned To: <span>{issue.assignedTo}</span>
         </p>
         <p>
           Description
@@ -17,7 +17,7 @@ export const Issue = ({ issue }) => {
         </p>
       </div>
       <p>
-        Updated <span>{new Date().toLocaleString()}</span>
+        Updated <span>{new Date(issue.createdAt).toLocaleString()}</span>
       </p>
     </div>
   );

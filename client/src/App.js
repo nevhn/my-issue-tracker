@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { CurrentIssues } from './Pages/CurrentIssues';
 import { AddIssue } from './Pages/AddIssue';
 import { useEffect, useState } from 'react';
+import { Register } from './Pages/Register';
 function App() {
   const [issues, setIssues] = useState([]);
   useEffect(() => {
@@ -27,8 +28,11 @@ function App() {
         <Route exact path='/'>
           <CurrentIssues issues={issues} />
         </Route>
-        <Route exact path='/add-issue'>
+        <Route exact path='/add'>
           <AddIssue />
+        </Route>
+        <Route exact path='/register'>
+          <Register />
         </Route>
       </Switch>
     </Router>
