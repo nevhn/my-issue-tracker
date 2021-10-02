@@ -14,6 +14,7 @@ export const Login = () => {
     if (response.data.status === 'ok') {
       localStorage.setItem('token', response.data.data);
       alert('login successful');
+      window.location.replace('/profile');
     }
     console.log('login response', response.data);
   };

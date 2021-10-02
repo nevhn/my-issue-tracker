@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 
 export const AddIssue = () => {
   const [description, setDescription] = useState('');
-  const [assignedTo, setAssigned] = useState('');
+  const [assignedTo, setAssigned] = useState(null);
   const [priority, setPriority] = useState('low');
   const [devs, setDevs] = useState([]);
 
   useEffect(() => {
-    const getDevs = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await axios('/issues/devs');
-        // setDevs([...new Set(response.data)]);
+        const response = await axios('/users');
+        console.log('response', response.data);
         const uniqueDevs = [
           ...new Set(response.data.map((item) => item.username)),
         ];
@@ -20,15 +20,8 @@ export const AddIssue = () => {
       } catch (error) {
         console.error(error);
       }
-
-      // let unqiue = response.data.filter((value, index, self) => {
-      //   console.log('value', value);
-      //   return self.indexOf(value) === index;
-      // });
-      // const arr = response.data.filter(x =>)
-      // devs.map((dev) => console.log(dev));
     };
-    getDevs();
+    fetchUsers();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -40,6 +33,7 @@ export const AddIssue = () => {
         priority,
       };
       const response = await axios.post('/issues/add', body);
+      alert(`Issue assigned to ${assignedTo}`);
       console.log(response.status);
     } catch (error) {
       console.error(error);

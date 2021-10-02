@@ -6,7 +6,7 @@ const use = (fn) => (req, res, next) => {
 };
 
 router.get('/', use(controller.getAllIssues));
-router.get('/devs', use(controller.getAllDevs));
+router.get('/:username', use(controller.getIssue));
 router.post('/add', use(controller.addIssue));
 router.delete('/', use(controller.deleteIssue));
 

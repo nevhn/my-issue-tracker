@@ -1,5 +1,4 @@
 const Issues = require('../models/issues.model');
-
 const User = require('../models/user.model');
 
 exports.getAllIssues = async (req, res, next) => {
@@ -13,12 +12,6 @@ exports.deleteIssue = async (req, res, next) => {
   res.send({ status: 'ok' });
 };
 
-exports.getAllDevs = async (req, res, next) => {
-  const user = await User.find({}).select('username -_id');
-  console.log('people: ', user);
-  res.send(user);
-};
-
 exports.addIssue = async (req, res, next) => {
   console.log('req.body: ', req.body);
   const newIssue = new Issues(req.body);
@@ -27,4 +20,12 @@ exports.addIssue = async (req, res, next) => {
   // console.log(saveIssue);
 
   res.send(saveIssue);
+};
+
+exports.getIssue = async (req, res, next) => {
+  const username = req.params.username;
+  console.log('req.params', username);
+  const issues = await Issues.find({ assignedTo: username });
+  // console.log(issues);
+  res.send(issues);
 };

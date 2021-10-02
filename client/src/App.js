@@ -1,33 +1,19 @@
 import './App.css';
-import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { CurrentIssues } from './Pages/CurrentIssues';
-import { AddIssue } from './Pages/AddIssue';
-import { useEffect, useState } from 'react';
-import { Register } from './Pages/Register';
-import { Login } from './Pages/Login';
+import { CurrentIssues } from './Pages/CurrentIssues/CurrentIssues';
+import { AddIssue } from './Pages/AddIssue/AddIssue';
+import { Register } from './Pages/Register/Register';
+import { Login } from './Pages/Login/Login';
+import { Profile } from './Pages/Profile/Profile';
+import { Header } from './Components/Header';
+
 function App() {
-  const [issues, setIssues] = useState([]);
-  useEffect(() => {
-    const fetchIssues = async () => {
-      const response = await axios.get('/issues');
-      setIssues(response.data);
-    };
-
-    fetchIssues();
-  }, []);
-
-  console.log('list of current issues: ', issues);
   return (
     <Router>
-      <div className='App'>
-        <div className='header'>
-          <h1 className='header-title'>Issue tracker</h1>
-        </div>
-      </div>
+      <Header />
       <Switch>
         <Route exact path='/'>
-          <CurrentIssues issues={issues} />
+          <CurrentIssues />
         </Route>
         <Route exact path='/add'>
           <AddIssue />
@@ -37,6 +23,9 @@ function App() {
         </Route>
         <Route exact path='/login'>
           <Login />
+        </Route>
+        <Route exact path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>

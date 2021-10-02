@@ -30,8 +30,9 @@ exports.login = async (req, res, next) => {
   if (!user) {
     return res.send({ status: 'error', error: 'invalid username/password' });
   }
+
+  // run if user credentials are correct
   if (await bcrypt.compare(password, user.password)) {
-    // run if username and password matches
     console.log(user);
     const token = jwt.sign(
       { id: user._id, username: user.username },

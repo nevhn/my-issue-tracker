@@ -1,14 +1,21 @@
 import axios from 'axios';
 import React from 'react';
 import './Issue';
+
 export const Issue = ({ issue }) => {
-  console.log(issue);
   const handleClick = async () => {
-    const response = await axios.delete('/issues', {
-      id: issue._id,
-    });
-    console.log(response.data);
+    try {
+      const response = await axios.delete('/issues', {
+        id: issue._id,
+      });
+      // console.log(response.data);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
   };
+
   return (
     <div>
       <div className='issue-table'>
