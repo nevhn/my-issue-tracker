@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {
+  Container,
+  Form,
+  FullNameDiv,
+  UsernameDiv,
+  PasswordDiv,
+  Label,
+  Input,
+  ButtonDiv,
+  RegisterButton,
+  LoginLink,
+} from './Register.style';
 
 export const Register = () => {
   const [username, setUsername] = useState(null);
@@ -9,21 +22,27 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await axios.post('/auth/register', {
-      firstName,
-      lastName,
-      username,
-      password,
-    });
-    console.log('register:', response.data);
+    try {
+      const response = await axios.post('/auth/register', {
+        firstName,
+        lastName,
+        username,
+        password,
+      });
+      console.log('register:', response.data);
+      window.location.replace('/login');
+    } catch (error) {
+      alert('username already taken');
+    }
   };
+
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor=''>
-          First Name
-          <input
+    <Container>
+      <Form onSubmit={(e) => handleSubmit(e)}>
+        <FullNameDiv>
+          <Label>First Name</Label>
+          <Input
+            placeholder='John'
             required
             pattern='\S+.*'
             type='text'
@@ -31,10 +50,11 @@ export const Register = () => {
             id='firstname'
             onChange={(e) => setFirstName(e.target.value)}
           />
-        </label>
-        <label htmlFor=''>
-          Last Name
-          <input
+        </FullNameDiv>
+        <FullNameDiv>
+          <Label>Last Name</Label>
+          <Input
+            placeholder='Doe'
             required
             pattern='\S+.*'
             type='text'
@@ -42,10 +62,10 @@ export const Register = () => {
             id='lastname'
             onChange={(e) => setLastName(e.target.value)}
           />
-        </label>
-        <label htmlFor=''>
-          Username
-          <input
+        </FullNameDiv>
+        <UsernameDiv>
+          <Label>Username</Label>
+          <Input
             required
             pattern='\S+'
             type='text'
@@ -53,19 +73,24 @@ export const Register = () => {
             id='username'
             onChange={(e) => setUsername(e.target.value)}
           />
-        </label>
-        <label htmlFor=''>
-          Password
-          <input
+        </UsernameDiv>
+        <PasswordDiv>
+          <Label>Password</Label>
+          <Input
             required
             type='password'
             name=''
             id='password'
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <button type='submit'>Register</button>
-      </form>
-    </div>
+        </PasswordDiv>
+        <ButtonDiv>
+          <RegisterButton type='submit'>Register</RegisterButton>
+          <Link to='/login'>
+            <LoginLink>Login</LoginLink>
+          </Link>
+        </ButtonDiv>
+      </Form>
+    </Container>
   );
 };

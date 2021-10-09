@@ -1,5 +1,17 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  Container,
+  Form,
+  UsernameLabel,
+  UsernameInput,
+  PasswordLabel,
+  PasswordInput,
+  SubmitButton,
+  ButtonDiv,
+  RegisterLink,
+} from './Login.style';
 
 export const Login = () => {
   const [username, setUsername] = useState(null);
@@ -18,30 +30,35 @@ export const Login = () => {
     }
     console.log('login response', response.data);
   };
-  return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor=''>
-          username
-          <input
-            type='text'
-            name='username'
-            id='username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
 
-        <label htmlFor=''>
-          password
-          <input
-            type='password'
-            name='password'
-            id='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type='submit'>login</button>
-      </form>
-    </div>
+  return (
+    <Container>
+      <Form onSubmit={(e) => handleSubmit(e)}>
+        <UsernameLabel htmlFor=''>Username</UsernameLabel>
+        <UsernameInput
+          type='text'
+          name='username'
+          id='username'
+          required
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <PasswordLabel htmlFor=''>Password</PasswordLabel>
+        <PasswordInput
+          type='password'
+          name='password'
+          id='password'
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <ButtonDiv>
+          <SubmitButton type='submit'>login</SubmitButton>
+          <Link to='/register'>
+            <RegisterLink>Register</RegisterLink>
+          </Link>
+        </ButtonDiv>
+      </Form>
+    </Container>
   );
 };

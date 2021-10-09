@@ -1,6 +1,17 @@
 import axios from 'axios';
 import React from 'react';
-import './Issue';
+import {
+  Container,
+  CloseButton,
+  PriorityTag,
+  PrioritySpan,
+  AssignedToTag,
+  AssignedToSpan,
+  DescriptionSpan,
+  DescriptionTag,
+  DateTag,
+  DateSpan,
+} from './Issue.style';
 
 export const Issue = ({ issue }) => {
   const handleClick = async () => {
@@ -17,23 +28,23 @@ export const Issue = ({ issue }) => {
   };
 
   return (
-    <div>
-      <div className='issue-table'>
-        <button onClick={() => handleClick()}>Close issue</button>
-        <p>
-          Priority: <span>{issue.priority}</span>
-        </p>
-        <p>
-          Assigned To: <span>{issue.assignedTo}</span>
-        </p>
-        <p>
-          Description:
-          <span>{issue.description}</span>
-        </p>
-      </div>
-      <p>
-        Updated <span>{new Date(issue.createdAt).toLocaleString()}</span>
-      </p>
-    </div>
+    <Container>
+      <CloseButton onClick={() => handleClick()}>Close issue</CloseButton>
+      <PriorityTag>
+        Priority{' '}
+        <PrioritySpan $level={issue.priority}>{issue.priority}</PrioritySpan>
+      </PriorityTag>
+      <AssignedToTag>
+        Assigned <AssignedToSpan>{issue.assignedTo}</AssignedToSpan>
+      </AssignedToTag>
+      <DescriptionTag>
+        Description
+        <DescriptionSpan>{issue.description}</DescriptionSpan>
+      </DescriptionTag>
+      <DateTag>
+        Submitted
+        <DateSpan>{new Date(issue.createdAt).toLocaleString()}</DateSpan>
+      </DateTag>
+    </Container>
   );
 };

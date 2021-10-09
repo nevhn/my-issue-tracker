@@ -1,6 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Container,
+  Form,
+  DescriptionLabel,
+  DescriptionTextarea,
+  AssignToLabel,
+  AssignToSelect,
+  AssignToOption,
+  PriorityLabel,
+  PrioritySelect,
+  PriorityOption,
+  AddButton,
+} from './AddIssue.style';
 
 export const AddIssue = () => {
   const [description, setDescription] = useState('');
@@ -25,7 +37,7 @@ export const AddIssue = () => {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const body = {
         description,
@@ -45,56 +57,49 @@ export const AddIssue = () => {
   // console.log(assignedTo);
   // console.log(priority);
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label>
-          <span>Description</span>
-          <input
-            type='text'
-            name=''
-            id=''
-            placeholder='Description of issue...'
-            required
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <label>
-          <span>Assign to</span>
-          <select
-            required
-            name='dev'
-            id='dev'
-            onChange={(e) => setAssigned(e.target.value)}
-            defaultValue=''
-          >
-            <option value='' disabled></option>
-            {devs.map((dev) => (
-              <option value={dev}>{dev}</option>
-            ))}
-            {/* fetch users from another endpoint */}
-            {/*
+    <Container>
+      <Form onSubmit={(e) => handleSubmit(e)}>
+        <AssignToLabel>Assign to</AssignToLabel>
+        <AssignToSelect
+          required
+          name='dev'
+          id='dev'
+          onChange={(e) => setAssigned(e.target.value)}
+          defaultValue=''
+        >
+          <AssignToOption value='' disabled></AssignToOption>
+          {devs.map((dev) => (
+            <AssignToOption value={dev}>{dev}</AssignToOption>
+          ))}
+          {/* fetch users from another endpoint */}
+          {/*
             <option value='person 1'>Person 1</option>
             <option value='person 2'>Person 2</option>
-            <option value='person 3'>Person 3</option> */}
-          </select>
-        </label>
-        <label>
-          <span>Priority</span>
-          <select
-            name='priority'
-            id='priority'
-            onChange={(e) => setPriority(e.target.value)}
-          >
-            <option value='low'>Low</option>
-            <option value='medium'>Medium</option>
-            <option value='high'>High</option>
-          </select>
-        </label>
-        <button type='submit'>Add</button>
-      </form>
-      <Link to='/'>
-        <button> Current issues</button>
-      </Link>
-    </div>
+          <option value='person 3'>Person 3</option> */}
+        </AssignToSelect>
+        <PriorityLabel>Priority</PriorityLabel>
+        <AssignToSelect
+          name='priority'
+          id='priority'
+          onChange={(e) => setPriority(e.target.value)}
+        >
+          <PriorityOption value='low'>Low</PriorityOption>
+          <PriorityOption value='medium'>Medium</PriorityOption>
+          <PriorityOption value='high'>High</PriorityOption>
+        </AssignToSelect>
+        <DescriptionLabel>Description</DescriptionLabel>
+        <DescriptionTextarea
+          name='description'
+          id='description'
+          placeholder='Description of issue...'
+          required
+          autoFocus
+          wrap
+          onChange={(e) => setDescription(e.target.value)}
+          textarea
+        />
+        <AddButton type='submit'>Add</AddButton>
+      </Form>
+    </Container>
   );
 };
