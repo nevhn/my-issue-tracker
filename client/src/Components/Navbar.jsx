@@ -3,20 +3,23 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Nav,
   LeftDiv,
+  RightDiv,
   Logo,
   HeaderSpan,
   CenterDiv,
   Ul,
   Li,
   Menu,
-  MenuButton,
-  MenuSvg,
+  MenuDiv,
+  // MenuButton,
+  // MenuSvg,
   Anchor,
 } from '../Components/Navbar.style';
 
-export const Navbar = ({ user }) => {
+export const Navbar = ({ user, toggleMenu }) => {
   // const [isUser, setIsUser] = useState(null);
   // const [token, setToken] = useState();
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const location = useLocation();
   const path = location.pathname;
 
@@ -36,9 +39,10 @@ export const Navbar = ({ user }) => {
   };
 
   // console.log(path);
-  console.log('user:', user);
+  // console.log('user:', user);
+  console.log('Navbar:', typeof toggleMenu);
   return (
-    <Nav>
+    <Nav role='navigation'>
       <LeftDiv>
         <Link to='/'>
           <Logo />
@@ -47,11 +51,9 @@ export const Navbar = ({ user }) => {
           <Link to='/'>ISSUE TRACKER </Link>
         </HeaderSpan>
       </LeftDiv>
-      <Menu>
-        <MenuButton>
-          <MenuSvg />
-        </MenuButton>
-      </Menu>
+      <MenuDiv onClick={toggleMenu}>
+        <Menu />
+      </MenuDiv>
       <CenterDiv>
         <Ul>
           {user ? (
@@ -77,10 +79,10 @@ export const Navbar = ({ user }) => {
             <Link to='/'>CURRENT ISSUES</Link>
           </Li>
         </Ul>
+        <RightDiv>
+          {user ? <Anchor onClick={() => handleLogout()}>LOGOUT</Anchor> : null}
+        </RightDiv>
       </CenterDiv>
-      <div>
-        {user ? <Anchor onClick={() => handleLogout()}>LOGOUT</Anchor> : null}
-      </div>
     </Nav>
   );
 };

@@ -26,7 +26,6 @@ export const Issue = ({ issue }) => {
       alert(error.message);
     }
   };
-
   return (
     <Container>
       <CloseButton onClick={() => handleClick()}>Close issue</CloseButton>

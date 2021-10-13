@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Issue } from '../../Components/Issue';
 import axios from 'axios';
 import { Container, IssueDiv } from './CurrentIssues.style';
+import { H3 } from '../Profile/Profile.style';
 
 export const CurrentIssues = () => {
   const [issues, setIssues] = useState([]);
@@ -21,11 +22,14 @@ export const CurrentIssues = () => {
     fetchIssues();
   }, []);
 
+  console.log('length:', issues.length);
   return (
     <Container>
-      {issues.map((issue) => (
-        <Issue key={issue._id} issue={issue} />
-      ))}
+      {issues.length ? (
+        issues.map((issue) => <Issue key={issue._id} issue={issue} />)
+      ) : (
+        <H3>No issues tracked</H3>
+      )}
     </Container>
   );
 };

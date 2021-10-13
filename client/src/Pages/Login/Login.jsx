@@ -27,7 +27,7 @@ export const Login = () => {
       localStorage.setItem('token', response.data.data);
       alert('login successful');
       window.location.replace('/profile');
-    }
+    } else alert('Invalid username password combination');
     console.log('login response', response.data);
   };
 
