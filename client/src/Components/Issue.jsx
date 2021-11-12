@@ -16,9 +16,12 @@ import {
 export const Issue = ({ issue }) => {
   const handleClick = async () => {
     try {
-      const response = await axios.delete('/issues', {
-        id: issue._id,
-      });
+      const response = await axios.delete(
+        'https://my-issue-tracker-v1.herokuapp.com/api/issues',
+        {
+          id: issue._id,
+        }
+      );
       // console.log(response.data);
       window.location.reload();
     } catch (error) {

@@ -11,7 +11,9 @@ export const CurrentIssues = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('/issues');
+        const response = await axios.get(
+          'https://my-issue-tracker-v1.herokuapp.com/api/issues'
+        );
         setIssues(response.data);
         // console.log('search: ', search);
       } catch (error) {

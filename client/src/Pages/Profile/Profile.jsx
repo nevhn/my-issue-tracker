@@ -23,7 +23,9 @@ export const Profile = ({ user }) => {
     // const token = JSON.parse(atob(payload));
     const fetchUser = async () => {
       try {
-        const response = await axios(`/users/${user.id}`);
+        const response = await axios(
+          `https://my-issue-tracker-v1.herokuapp.com/api/users/${user.id}`
+        );
         console.log('fetchUser:', response);
         setUserInfo(response.data);
       } catch (error) {
@@ -32,7 +34,9 @@ export const Profile = ({ user }) => {
     };
     const fetchIssues = async () => {
       try {
-        const response = await axios.get(`/issues/${user.username}`);
+        const response = await axios.get(
+          `https://my-issue-tracker-v1.herokuapp.com/api/issues/${user.username}`
+        );
         console.log('fetchIssues:', response);
         setIssues(response.data);
       } catch (error) {

@@ -2,13 +2,14 @@ console.clear();
 // ====================================
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const issuesRoute = require('./routes/issues.routes');
 const authRoute = require('./routes/auth.routes');
 const userRoute = require('./routes/user.routes');
 
-app.set('port', process.env.port || 8080);
+app.set('port', process.env.PORT || 8080);
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -21,6 +22,7 @@ mongoose
 // config express
 app.use(express.json()); // parses json
 app.use(express.urlencoded({ extended: true })); // parses payload
+app.use(cors());
 
 // routes
 app.use('/api/issues', issuesRoute);

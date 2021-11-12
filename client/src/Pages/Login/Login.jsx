@@ -19,10 +19,13 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('/auth/login', {
-      username,
-      password,
-    });
+    const response = await axios.post(
+      'https://my-issue-tracker-v1.herokuapp.com/api/auth/login',
+      {
+        username,
+        password,
+      }
+    );
     if (response.data.status === 'ok') {
       localStorage.setItem('token', response.data.data);
       alert('login successful');

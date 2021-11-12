@@ -23,12 +23,15 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/auth/register', {
-        firstName,
-        lastName,
-        username,
-        password,
-      });
+      const response = await axios.post(
+        'https://my-issue-tracker-v1.herokuapp.com/api/auth/register',
+        {
+          firstName,
+          lastName,
+          username,
+          password,
+        }
+      );
       console.log('register:', response.data);
       window.location.replace('/login');
     } catch (error) {
