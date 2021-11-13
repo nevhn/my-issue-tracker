@@ -1,4 +1,4 @@
-# my-issue-tracker
+# Issue-Tracker
 
 
 A fullstack issue/bug tracker webpage
