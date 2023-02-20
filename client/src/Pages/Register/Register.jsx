@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   Container,
   Form,
@@ -12,7 +12,7 @@ import {
   ButtonDiv,
   RegisterButton,
   LoginLink,
-} from './Register.style';
+} from "./Register.style";
 
 export const Register = () => {
   const [username, setUsername] = useState(null);
@@ -24,7 +24,8 @@ export const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://my-issue-tracker-v1.herokuapp.com/api/auth/register',
+        // 'https://my-issue-tracker-v1.herokuapp.com/api/auth/register',
+        "http://localhost:8080/api/auth/register",
         {
           firstName,
           lastName,
@@ -32,10 +33,10 @@ export const Register = () => {
           password,
         }
       );
-      console.log('register:', response.data);
-      window.location.replace('/login');
+      console.log("register:", response.data);
+      window.location.replace("/login");
     } catch (error) {
-      alert('username already taken');
+      alert("username already taken");
     }
   };
 
@@ -45,24 +46,24 @@ export const Register = () => {
         <FullNameDiv>
           <Label>First Name</Label>
           <Input
-            placeholder='John'
+            placeholder="John"
             required
-            pattern='\S+.*'
-            type='text'
-            name=''
-            id='firstname'
+            pattern="\S+.*"
+            type="text"
+            name=""
+            id="firstname"
             onChange={(e) => setFirstName(e.target.value)}
           />
         </FullNameDiv>
         <FullNameDiv>
           <Label>Last Name</Label>
           <Input
-            placeholder='Doe'
+            placeholder="Doe"
             required
-            pattern='\S+.*'
-            type='text'
-            name=''
-            id='lastname'
+            pattern="\S+.*"
+            type="text"
+            name=""
+            id="lastname"
             onChange={(e) => setLastName(e.target.value)}
           />
         </FullNameDiv>
@@ -70,10 +71,10 @@ export const Register = () => {
           <Label>Username</Label>
           <Input
             required
-            pattern='\S+'
-            type='text'
-            name=''
-            id='username'
+            pattern="\S+"
+            type="text"
+            name=""
+            id="username"
             onChange={(e) => setUsername(e.target.value)}
           />
         </UsernameDiv>
@@ -81,15 +82,15 @@ export const Register = () => {
           <Label>Password</Label>
           <Input
             required
-            type='password'
-            name=''
-            id='password'
+            type="password"
+            name=""
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </PasswordDiv>
         <ButtonDiv>
-          <RegisterButton type='submit'>Register</RegisterButton>
-          <Link to='/login'>
+          <RegisterButton type="submit">Register</RegisterButton>
+          <Link to="/login">
             <LoginLink>Login</LoginLink>
           </Link>
         </ButtonDiv>

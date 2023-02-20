@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Nav,
   LeftDiv,
@@ -14,7 +14,7 @@ import {
   // MenuButton,
   // MenuSvg,
   Anchor,
-} from '../Components/Navbar.style';
+} from "../Components/Navbar.style";
 
 export const Navbar = ({ user, toggleMenu }) => {
   // const [isUser, setIsUser] = useState(null);
@@ -33,22 +33,22 @@ export const Navbar = ({ user, toggleMenu }) => {
   // }, []);
 
   const handleLogout = () => {
-    console.log('logged out');
-    localStorage.setItem('token', null);
-    window.location.replace('/');
+    // console.log("logged out");
+    localStorage.removeItem("token");
+    window.location.replace("/");
   };
 
   // console.log(path);
   // console.log('user:', user);
-  console.log('Navbar:', typeof toggleMenu);
+  console.log("Navbar:", typeof toggleMenu);
   return (
-    <Nav role='navigation'>
+    <Nav role="navigation">
       <LeftDiv>
-        <Link to='/'>
+        <Link to="/">
           <Logo />
         </Link>
         <HeaderSpan>
-          <Link to='/'>ISSUE TRACKER </Link>
+          <Link to="/">ISSUE TRACKER </Link>
         </HeaderSpan>
       </LeftDiv>
       <MenuDiv onClick={toggleMenu}>
@@ -58,26 +58,24 @@ export const Navbar = ({ user, toggleMenu }) => {
         <Ul>
           {user ? (
             <Li>
-              <Link to='/profile'>PROFILE</Link>
+              <Link to="/profile">PROFILE</Link>
             </Li>
           ) : (
             <Li>
-              <Link to='/login'>LOGIN</Link>
+              <Link to="/login">LOGIN</Link>
             </Li>
           )}
 
           {!user ? (
             <Li>
-              <Link to='/register'>REGISTER</Link>
+              <Link to="/register">REGISTER</Link>
             </Li>
           ) : null}
 
           <Li>
-            <Link to='/add'>ADD ISSUE</Link>
+            <Link to="/add">ADD ISSUE</Link>
           </Li>
-          <Li>
-            <Link to='/'>CURRENT ISSUES</Link>
-          </Li>
+          <Li>{path === "/" ? null : <Link to="/">CURRENT ISSUES</Link>}</Li>
         </Ul>
         <RightDiv>
           {user ? <Anchor onClick={() => handleLogout()}>LOGOUT</Anchor> : null}

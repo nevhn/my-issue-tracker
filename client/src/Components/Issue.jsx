@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React from 'react';
+import axios from "axios";
+import React from "react";
 import {
   Container,
   CloseButton,
@@ -11,17 +11,19 @@ import {
   DescriptionTag,
   DateTag,
   DateSpan,
-} from './Issue.style';
+} from "./Issue.style";
 
-export const Issue = ({ issue }) => {
+export const Issue = ({ issue, user }) => {
   const handleClick = async () => {
     try {
-      const response = await axios.delete(
-        'https://my-issue-tracker-v1.herokuapp.com/api/issues',
-        {
-          id: issue._id,
-        }
-      );
+      // console.log("you clicked:", issue._id);
+      // console.log(user.username);
+      if (issue.assignedTo === user.username) {
+        const response = await axios.delete(
+          `http://localhost:8080/api/issues/delete/`,
+          { data: { id: issue._id } }
+        );
+      }
       // console.log(response.data);
       window.location.reload();
     } catch (error) {
@@ -30,10 +32,13 @@ export const Issue = ({ issue }) => {
     }
   };
   return (
+    // <Container onClick={() => console.log(issue)}>
     <Container>
-      <CloseButton onClick={() => handleClick()}>Close issue</CloseButton>
+      {user.username === issue.assignedTo ? (
+        <CloseButton onClick={() => handleClick()}>Close issue</CloseButton>
+      ) : null}
       <PriorityTag>
-        Priority{' '}
+        Priority{" "}
         <PrioritySpan $level={issue.priority}>{issue.priority}</PrioritySpan>
       </PriorityTag>
       <AssignedToTag>

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -12,21 +12,22 @@ import {
   PrioritySelect,
   PriorityOption,
   AddButton,
-} from './AddIssue.style';
+} from "./AddIssue.style";
 
 export const AddIssue = () => {
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [assignedTo, setAssigned] = useState(null);
-  const [priority, setPriority] = useState('low');
+  const [priority, setPriority] = useState("low");
   const [devs, setDevs] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios(
-          'https://my-issue-tracker-v1.herokuapp.com/api/users'
+          // 'https://my-issue-tracker-v1.herokuapp.com/api/users'
+          "http://localhost:8080/api/users"
         );
-        console.log('response', response.data);
+        console.log("response", response.data);
         const uniqueDevs = [
           ...new Set(response.data.map((item) => item.username)),
         ];
@@ -47,7 +48,9 @@ export const AddIssue = () => {
         priority,
       };
       const response = await axios.post(
-        'https://my-issue-tracker-v1.herokuapp.com/api/issues/add',
+        // "https://my-issue-tracker-v1.herokuapp.com/api/issues/add",
+        "http://localhost:8080/api/issues/add",
+
         body
       );
       alert(`Issue assigned to ${assignedTo}`);
@@ -67,12 +70,12 @@ export const AddIssue = () => {
         <AssignToLabel>Assign to</AssignToLabel>
         <AssignToSelect
           required
-          name='dev'
-          id='dev'
+          name="dev"
+          id="dev"
           onChange={(e) => setAssigned(e.target.value)}
-          defaultValue=''
+          defaultValue=""
         >
-          <AssignToOption value='' disabled></AssignToOption>
+          <AssignToOption value="" disabled></AssignToOption>
           {devs.map((dev) => (
             <AssignToOption value={dev}>{dev}</AssignToOption>
           ))}
@@ -84,26 +87,26 @@ export const AddIssue = () => {
         </AssignToSelect>
         <PriorityLabel>Priority</PriorityLabel>
         <AssignToSelect
-          name='priority'
-          id='priority'
+          name="priority"
+          id="priority"
           onChange={(e) => setPriority(e.target.value)}
         >
-          <PriorityOption value='low'>Low</PriorityOption>
-          <PriorityOption value='medium'>Medium</PriorityOption>
-          <PriorityOption value='high'>High</PriorityOption>
+          <PriorityOption value="low">Low</PriorityOption>
+          <PriorityOption value="medium">Medium</PriorityOption>
+          <PriorityOption value="high">High</PriorityOption>
         </AssignToSelect>
         <DescriptionLabel>Description</DescriptionLabel>
         <DescriptionTextarea
-          name='description'
-          id='description'
-          placeholder='Description of issue...'
+          name="description"
+          id="description"
+          placeholder="Description of issue..."
           required
           autoFocus
           wrap
           onChange={(e) => setDescription(e.target.value)}
           textarea
         />
-        <AddButton type='submit'>Add</AddButton>
+        <AddButton type="submit">Add</AddButton>
       </Form>
     </Container>
   );

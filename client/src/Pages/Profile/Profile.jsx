@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Issue } from '../../Components/Issue';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Issue } from "../../Components/Issue";
 import {
   Container,
   Header,
@@ -9,7 +9,7 @@ import {
   H3,
   IssueDiv,
   H1Span,
-} from './Profile.style';
+} from "./Profile.style";
 export const Profile = ({ user }) => {
   // const [user, setUser] = useState({});
   const [userInfo, setUserInfo] = useState({});
@@ -24,9 +24,10 @@ export const Profile = ({ user }) => {
     const fetchUser = async () => {
       try {
         const response = await axios(
-          `https://my-issue-tracker-v1.herokuapp.com/api/users/${user.id}`
+          // `https://my-issue-tracker-v1.herokuapp.com/api/users/${user.id}`
+          `http://localhost:8080/api/users/${user.id}`
         );
-        console.log('fetchUser:', response);
+        console.log("fetchUser:", response);
         setUserInfo(response.data);
       } catch (error) {
         console.error(error);
@@ -35,9 +36,10 @@ export const Profile = ({ user }) => {
     const fetchIssues = async () => {
       try {
         const response = await axios.get(
-          `https://my-issue-tracker-v1.herokuapp.com/api/issues/${user.username}`
+          // `https://my-issue-tracker-v1.herokuapp.com/api/issues/${user.username}`
+          `http://localhost:8080/api/issues/${user.username}`
         );
-        console.log('fetchIssues:', response);
+        console.log("fetchIssues:", response);
         setIssues(response.data);
       } catch (error) {
         console.error(error);
@@ -49,7 +51,7 @@ export const Profile = ({ user }) => {
   }, []);
 
   console.log(user);
-  console.log('issues', issues);
+  console.log("issues", issues);
 
   return (
     <Container>
