@@ -14,6 +14,12 @@ import {
 } from "./Issue.style";
 
 export const Issue = ({ issue, user }) => {
+  /**When user logs out, the user object will be null */
+  let isUser = null;
+  if (user) {
+    isUser = user.username;
+    // console.log("isUser:", user);
+  }
   const handleClick = async () => {
     try {
       // console.log("you clicked:", issue._id);
@@ -34,7 +40,7 @@ export const Issue = ({ issue, user }) => {
   return (
     // <Container onClick={() => console.log(issue)}>
     <Container>
-      {user.username === issue.assignedTo ? (
+      {isUser === issue.assignedTo ? (
         <CloseButton onClick={() => handleClick()}>Close issue</CloseButton>
       ) : null}
       <PriorityTag>

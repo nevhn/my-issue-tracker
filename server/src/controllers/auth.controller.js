@@ -1,7 +1,7 @@
-require('dotenv').config();
-const User = require('../models/user.model');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+require("dotenv").config();
+const User = require("../models/user.model");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
   //   console.log("request body: ", req.body);
@@ -20,28 +20,28 @@ exports.register = async (req, res, next) => {
   });
 
   const response = await newUser.save();
-  console.log('User created successfully', response);
-  res.send({ status: 'success' });
+  // console.log("User created successfully", response);
+  res.send({ status: "success" });
 };
 
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username }).lean();
   if (!user) {
-    return res.send({ status: 'error', error: 'invalid username/password' });
+    return res.send({ status: "error", error: "invalid username/password" });
   }
 
   // run if user credentials are correct
   if (await bcrypt.compare(password, user.password)) {
-    console.log(user);
+    // console.log(user);
     const token = jwt.sign(
       { id: user._id, username: user.username },
       process.env.JWT_SECRET
     );
 
-    return res.send({ status: 'ok', data: token });
+    return res.send({ status: "ok", data: token });
   }
 
-  console.log(req.body);
-  res.send({ status: 'success' });
+  // console.log(req.body);
+  res.send({ status: "success" });
 };

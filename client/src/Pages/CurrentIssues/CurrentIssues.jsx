@@ -9,6 +9,7 @@ export const CurrentIssues = ({ user }) => {
   const [issues, setIssues] = useState([]);
 
   useEffect(() => {
+    // const user = user || null;
     const fetchIssues = async () => {
       try {
         const response = await axios.get(
@@ -30,7 +31,7 @@ export const CurrentIssues = ({ user }) => {
     <Container>
       {issues.length ? (
         issues.map((issue) => (
-          <Issue key={issue._id} issue={issue} user={user} />
+          <Issue key={issue._id} issue={issue} user={user || null} />
         ))
       ) : (
         <H3>No issues tracked</H3>
