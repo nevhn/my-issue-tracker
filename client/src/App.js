@@ -8,6 +8,7 @@ import { Navbar } from "./Components/Navbar";
 import { useEffect, useState } from "react";
 import { GlobalStyles } from "./GlobalStyles.style";
 import { Dropdown } from "./Components/Dropdown/Dropdown";
+// import * as dotenv from ''
 
 function App() {
   const [user, setUser] = useState(null);

@@ -27,6 +27,7 @@ export const Issue = ({ issue, user }) => {
       if (issue.assignedTo === user.username) {
         const response = await axios.delete(
           `http://localhost:8080/api/issues/delete/`,
+          // `${window.location.origin}/api/issues/delete/`,
           { data: { id: issue._id } }
         );
       }
