@@ -14,6 +14,10 @@ import {
   AddButton,
 } from "./AddIssue.style";
 
+import config from "../../config";
+
+const endpoint = config.API_ENDPOINT;
+
 export const AddIssue = () => {
   const [description, setDescription] = useState("");
   const [assignedTo, setAssigned] = useState(null);
@@ -24,8 +28,8 @@ export const AddIssue = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios(
-          // 'https://my-issue-tracker-v1.herokuapp.com/api/users'
-          "http://localhost:8080/api/users"
+          // "http://localhost:8080/api/users"
+          `${endpoint}/users`
         );
         console.log("response", response.data);
         const uniqueDevs = [
@@ -48,8 +52,8 @@ export const AddIssue = () => {
         priority,
       };
       const response = await axios.post(
-        // "https://my-issue-tracker-v1.herokuapp.com/api/issues/add",
-        "http://localhost:8080/api/issues/add",
+        // "http://localhost:8080/api/issues/add",
+        `${endpoint}/issues/add`,
 
         body
       );

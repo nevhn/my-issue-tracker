@@ -13,6 +13,9 @@ import {
   RegisterButton,
   LoginLink,
 } from "./Register.style";
+import config from "../../config";
+
+const endpoint = config.API_ENDPOINT;
 
 export const Register = () => {
   const [username, setUsername] = useState(null);
@@ -24,8 +27,8 @@ export const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        // 'https://my-issue-tracker-v1.herokuapp.com/api/auth/register',
-        "http://localhost:8080/api/auth/register",
+        // "http://localhost:8080/api/auth/register",
+        `${endpoint}/auth/register`,
         {
           firstName,
           lastName,
@@ -33,7 +36,7 @@ export const Register = () => {
           password,
         }
       );
-      console.log("register:", response.data);
+      // console.log("register:", response.data);
       window.location.replace("/login");
     } catch (error) {
       alert("username already taken");

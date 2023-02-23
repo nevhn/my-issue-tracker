@@ -12,6 +12,9 @@ import {
   ButtonDiv,
   RegisterLink,
 } from "./Login.style";
+import config from "../../config";
+
+const endpoint = config.API_ENDPOINT;
 
 export const Login = () => {
   const [username, setUsername] = useState(null);
@@ -20,8 +23,8 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      // 'https://my-issue-tracker-v1.herokuapp.com/api/auth/login',
-      "http://localhost:8080/api/auth/login",
+      // "http://localhost:8080/api/auth/login",
+      `${endpoint}/auth/login`,
       {
         username,
         password,

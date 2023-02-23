@@ -10,6 +10,10 @@ import {
   IssueDiv,
   H1Span,
 } from "./Profile.style";
+import config from "../../config";
+
+const endpoint = config.API_ENDPOINT;
+
 export const Profile = ({ user }) => {
   // const [user, setUser] = useState({});
   const [userInfo, setUserInfo] = useState({});
@@ -24,8 +28,8 @@ export const Profile = ({ user }) => {
     const fetchUser = async () => {
       try {
         const response = await axios(
-          // `https://my-issue-tracker-v1.herokuapp.com/api/users/${user.id}`
-          `http://localhost:8080/api/users/${user.id}`
+          // `http://localhost:8080/api/users/${user.id}`
+          `${endpoint}/users/${user.id}`
         );
         console.log("fetchUser:", response);
         setUserInfo(response.data);
@@ -36,8 +40,8 @@ export const Profile = ({ user }) => {
     const fetchIssues = async () => {
       try {
         const response = await axios.get(
-          // `https://my-issue-tracker-v1.herokuapp.com/api/issues/${user.username}`
-          `http://localhost:8080/api/issues/${user.username}`
+          // `http://localhost:8080/api/issues/${user.username}`
+          `${endpoint}/issues/${user.username}`
         );
         console.log("fetchIssues:", response);
         setIssues(response.data);

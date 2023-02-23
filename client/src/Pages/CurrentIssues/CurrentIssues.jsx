@@ -4,6 +4,9 @@ import { Issue } from "../../Components/Issue";
 import axios from "axios";
 import { Container, IssueDiv } from "./CurrentIssues.style";
 import { H3 } from "../Profile/Profile.style";
+import config from "../../config";
+
+const endpoint = config.API_ENDPOINT;
 
 export const CurrentIssues = ({ user }) => {
   const [issues, setIssues] = useState([]);
@@ -13,8 +16,8 @@ export const CurrentIssues = ({ user }) => {
     const fetchIssues = async () => {
       try {
         const response = await axios.get(
-          // 'https://my-issue-tracker-v1.herokuapp.com/api/issues'
-          "http://localhost:8080/api/issues"
+          // "http://localhost:8080/api/issues"
+          `${endpoint}/issues`
         );
         setIssues(response.data);
         // console.log('search: ', search);

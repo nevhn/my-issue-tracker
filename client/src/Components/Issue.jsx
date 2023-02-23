@@ -13,6 +13,10 @@ import {
   DateSpan,
 } from "./Issue.style";
 
+import config from "../config";
+
+const endpoint = config.API_ENDPOINT;
+
 export const Issue = ({ issue, user }) => {
   /**When user logs out, the user object will be null */
   let isUser = null;
@@ -26,8 +30,8 @@ export const Issue = ({ issue, user }) => {
       // console.log(user.username);
       if (issue.assignedTo === user.username) {
         const response = await axios.delete(
-          `http://localhost:8080/api/issues/delete/`,
-          // `${window.location.origin}/api/issues/delete/`,
+          // `http://localhost:8080/api/issues/delete/`,
+          `${endpoint}/issues/delete`,
           { data: { id: issue._id } }
         );
       }
