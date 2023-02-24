@@ -5,6 +5,10 @@ A fullstack issue/bug tracker web app
 
 Stack used: MERN - MongoDB Express React NodeJS
 
+## Demo https://my-issue-tracker.vercel.app/ 
+
+- Front end hosted on [Vercel](https://vercel.com/) | Back end hosted on [Render](https://render.com/)
+
 
 ## Screenshots
 ![issue-tracker-main (2)](https://user-images.githubusercontent.com/51008990/220229599-a2dc6c1f-57b2-40df-97f7-1c669d55e37b.png)
