@@ -14,6 +14,7 @@ export const CurrentIssues = ({ user }) => {
   useEffect(() => {
     // const user = user || null;
     const fetchIssues = async () => {
+      console.log("endpoint", endpoint);
       try {
         const response = await axios.get(
           // "http://localhost:8080/api/issues"
