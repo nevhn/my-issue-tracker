@@ -45,7 +45,7 @@ export const AddIssue = () => {
 
   const handleSubmit = async (e) => {
     console.log(endpoint);
-    // e.preventDefault();
+    e.preventDefault();
     try {
       const body = {
         description,
