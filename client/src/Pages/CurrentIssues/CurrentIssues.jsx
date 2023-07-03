@@ -38,7 +38,7 @@ export const CurrentIssues = ({ user }) => {
           <Issue key={issue._id} issue={issue} user={user || null} />
         ))
       ) : (
-        <H3>No issues tracked</H3>
+        <H3>No issues tracked (Note: If no issues were deleted, the application is retrieving them from the database. Please allow a few seconds for the process to complete.)</H3>
       )}
     </Container>
   );
